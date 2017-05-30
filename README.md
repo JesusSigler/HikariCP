@@ -8,7 +8,7 @@ localhost:8080/
 
 Corregido error al insertar datos, debido a que el método implementado de CrudRepository intenta insertar también el valor del id:
 
-	insert into employee(id,nombre, emp_name, emp_designation, emp_salary) values(?,?,?,?);
+	insert into employee(id, emp_name, emp_designation, emp_salary) values(?,?,?,?);
 
 	@Override
 	public Employee saveEmployee(Employee emp) {
