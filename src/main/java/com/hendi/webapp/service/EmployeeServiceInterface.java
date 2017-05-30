@@ -6,7 +6,7 @@ import java.util.Collection;
 
 public interface EmployeeServiceInterface {
 
-	public Employee saveEmployee(Employee emp);
+	public void saveEmployee(Employee emp);
 	public Boolean deleteEmployee(String empId);
 	public Employee editEmployee(Employee emp);
 	public Employee findEmployee(String empId);

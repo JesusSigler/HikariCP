@@ -3,24 +3,32 @@ package com.hendi.webapp.service;
 import com.hendi.webapp.domain.Employee;
 import com.hendi.webapp.repository.EmployeeRepository;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 
 @Service
 @Transactional
 public class EmployeeServiceImplementation implements EmployeeServiceInterface{
-
+	private List<Employee> listaEmpleados = new LinkedList<Employee>();
 	@Autowired
 	protected EmployeeRepository employeeRepository;
+	
+	@Autowired
+	JdbcTemplate jdbcTemplate;
 
-	@Override
-	public Employee saveEmployee(Employee emp) {
-		// TODO Auto-generated method stub
-		return employeeRepository.save(emp);
+	public void saveEmployee(Employee emp) {
+		String sql = "insert into employee(emp_name, emp_designation, emp_salary) values(?,?,?)";
+		jdbcTemplate.update(sql, emp.getEmpName(), emp.getEmpDesignation(), emp.getEmpSalary());
+
+		listaEmpleados.add(emp);
+
 	}
 
 	@Override

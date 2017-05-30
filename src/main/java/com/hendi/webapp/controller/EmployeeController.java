@@ -27,19 +27,12 @@ public class EmployeeController {
 	public String savePage(Model model) {
 		model.addAttribute("employee", new Employee());
 		model.addAttribute("allEmployees", (ArrayList<Employee>)employeeServiceInterface.getAllEmployees());
-		return "index";
+		return "savepage";
 	}
 	
 	@RequestMapping(value = {"/employee/save"}, method = RequestMethod.POST)
-	public String saveEmployee(@ModelAttribute("employee") Employee employee,
-			final RedirectAttributes redirectAttributes) {
-		
-		if(employeeServiceInterface.saveEmployee(employee)!=null) {
-			redirectAttributes.addFlashAttribute("saveEmployee", "success");
-		} else {
-			redirectAttributes.addFlashAttribute("saveEmployee", "unsuccess");
-		}
-		
+	public String saveEmployee(@ModelAttribute("employee") Employee employee){
+			employeeServiceInterface.saveEmployee(employee);			
 		return "redirect:/savepage";
 	}
 	
